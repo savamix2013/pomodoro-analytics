@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status, HTTPException
 from typing import List
 
-from database import get_db_connection
+from database.database import get_db_connection
 from schema.task import Task
 
 router = APIRouter(prefix="/task", tags=["task"])

@@ -24,6 +24,11 @@ uninstall:
 	@echo "Uninstalling dependency $(LIBRARY)..."
 	poetry remove $(LIBRARY)
 
+migrate-create:
+	@echo "Creating a new migration..."
+	alembic revision --autogenerate -m "Added account table"
+	alembic upgrade head
+
 # -------------------------------
 # Help command
 # -------------------------------
