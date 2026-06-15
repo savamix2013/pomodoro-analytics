@@ -8,7 +8,7 @@
 # -------------------------------
 run:
 	@echo "Running the application..."
-	poetry run uvicorn main:app --host 0.0.0.0 --port 8008 --reload
+	poetry run uvicorn main:app --host 0.0.0.0 --port 8008 --reload --env-file $(ENV_FILE)
 
 # -------------------------------
 # Install a dependency using poetry
