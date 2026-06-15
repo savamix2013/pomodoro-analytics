@@ -239,6 +239,7 @@ $RECYCLE.BIN/
 *.sqlite3
 *.db-shm
 *.db-wal
+*.sqlite
 
 
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,venv,windows,database
