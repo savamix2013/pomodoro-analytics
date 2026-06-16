@@ -1,13 +1,12 @@
 import asyncio
 from logging.config import fileConfig
 from sqlalchemy.ext.asyncio import create_async_engine
-
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-from models import *
 from alembic import context
 
-from database import Base
+# Import models for autogenerate to work
+from app.tasks.models import Tasks, Categories
+from app.users.user_profile.models import UserProfile
+from app.infrastructure.database.database import Base
 from app.settings import Settings
 
 # this is the Alembic Config object, which provides

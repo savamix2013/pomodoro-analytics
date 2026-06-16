@@ -8,10 +8,10 @@ from jose import jwt
 pytestmark = pytest.mark.asyncio
 
 
-async def test_generate_access_token__success(auth_service: AuthService, settings: Settings):
-    user_id = str(1)
+async def test_generate_access_token__success(mock_auth_service: AuthService, settings: Settings):
+    user_id = 1
 
-    access_token = auth_service.generate_access_token(user_id=user_id)
+    access_token = mock_auth_service.generate_access_token(user_id=user_id)
     decoded_access_token = jwt.decode(
         access_token,
         settings.JWT_SECRET_KEY,
@@ -28,10 +28,10 @@ async def test_generate_access_token__success(auth_service: AuthService, setting
     assert decoded_user_id == user_id
 
 
-async def test_get_user_id_from_access_token__success(auth_service: AuthService):
-    user_id = str(1)
+async def test_get_user_id_from_access_token__success(mock_auth_service: AuthService):
+    user_id = 1
 
-    access_token = auth_service.generate_access_token(user_id=user_id)
-    decoded_user_id = auth_service.get_user_id_from_access_token(access_token)
+    access_token = mock_auth_service.generate_access_token(user_id=user_id)
+    decoded_user_id = mock_auth_service.get_user_id_from_access_token(access_token)
 
     assert decoded_user_id == user_id

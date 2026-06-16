@@ -6,9 +6,9 @@ from app.settings import Settings
 
 @dataclass
 class FakeUserRepository:
-    users: dict = None
+    users: dict
 
-    def __post_init__(self):
+    def __init__(self):
         self.users = {}
 
     async def get_user_by_username(self, username: str):
@@ -16,17 +16,19 @@ class FakeUserRepository:
 
     async def get_user_by_email(self, email: str):
         for user in self.users.values():
-            if user.email == email:
+            if getattr(user, "email", None) == email:
                 return user
         return None
 
     async def create_user(self, user_data):
         user_id = len(self.users) + 1
+
         user = type("User", (), {
             "id": user_id,
-            "username": user_data.username if hasattr(user_data, "username") else None,
+            "username": getattr(user_data, "username", None),
             "email": user_data.email,
-            "password": user_data.password if hasattr(user_data, "password") else None,
+            "password": getattr(user_data, "password", None),
+            "name": getattr(user_data, "name", None),
         })()
 
         self.users[user_id] = user
