@@ -304,12 +304,12 @@ version = "0.4.6"
 description = "Cross-platform colored terminal text."
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
-groups = ["main"]
-markers = "platform_system == \"Windows\""
+groups = ["main", "dev"]
 files = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
 ]
+markers = {main = "platform_system == \"Windows\" or sys_platform == \"win32\"", dev = "sys_platform == \"win32\""}
 
 [[package]]
 name = "contourpy"
@@ -437,6 +437,43 @@ six = ">=1.9.0"
 [package.extras]
 gmpy = ["gmpy"]
 gmpy2 = ["gmpy2"]
+
+[[package]]
+name = "factory-boy"
+version = "3.3.3"
+description = "A versatile test fixtures replacement based on thoughtbot's factory_bot for Ruby."
+optional = false
+python-versions = ">=3.8"
+groups = ["dev"]
+files = [
+    {file = "factory_boy-3.3.3-py2.py3-none-any.whl", hash = "sha256:1c39e3289f7e667c4285433f305f8d506efc2fe9c73aaea4151ebd5cdea394fc"},
+    {file = "factory_boy-3.3.3.tar.gz", hash = "sha256:866862d226128dfac7f2b4160287e899daf54f2612778327dd03d0e2cb1e3d03"},
+]
+
+[package.dependencies]
+Faker = ">=0.7.0"
+
+[package.extras]
+dev = ["Django", "Pillow", "SQLAlchemy", "coverage", "flake8", "isort", "mongoengine", "mongomock", "mypy", "tox", "wheel (>=0.32.0)", "zest.releaser[recommended]"]
+doc = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-spelling"]
+
+[[package]]
+name = "faker"
+version = "40.23.0"
+description = "Faker is a Python package that generates fake data for you."
+optional = false
+python-versions = ">=3.10"
+groups = ["dev"]
+files = [
+    {file = "faker-40.23.0-py3-none-any.whl", hash = "sha256:775922453e54afa42eaf60eac478fa3a969357f224d09a8022b93e3ad88f18ae"},
+    {file = "faker-40.23.0.tar.gz", hash = "sha256:f135e563f1f95f19346bb680bc2e43570bc43b7893e566023746f51f32c69dfc"},
+]
+
+[package.dependencies]
+tzdata = {version = "*", markers = "platform_system == \"Windows\""}
+
+[package.extras]
+tzdata = ["tzdata"]
 
 [[package]]
 name = "fastapi"
@@ -629,6 +666,29 @@ docs = ["Sphinx", "furo"]
 test = ["objgraph", "psutil", "setuptools"]
 
 [[package]]
+name = "gunicorn"
+version = "26.0.0"
+description = "WSGI HTTP Server for UNIX"
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = [
+    {file = "gunicorn-26.0.0-py3-none-any.whl", hash = "sha256:40233d26a5f0d1872916188c276e21641155111c2853f0c2cd55260aec0d24fc"},
+    {file = "gunicorn-26.0.0.tar.gz", hash = "sha256:ca9346f85e3a4aeeb64d491045c16b9a35647abd37ea15efe53080eb8b090baf"},
+]
+
+[package.dependencies]
+packaging = "*"
+
+[package.extras]
+fast = ["gunicorn_h1c (>=0.6.5)"]
+gevent = ["gevent (>=24.10.1)"]
+http2 = ["h2 (>=4.1.0)"]
+setproctitle = ["setproctitle"]
+testing = ["coverage", "gevent (>=24.10.1)", "h2 (>=4.1.0)", "httpx[http2]", "pytest", "pytest-asyncio", "pytest-cov", "uvloop (>=0.19.0)"]
+tornado = ["tornado (>=6.5.0)"]
+
+[[package]]
 name = "h11"
 version = "0.16.0"
 description = "A pure-Python, bring-your-own-I/O implementation of HTTP/1.1"
@@ -701,6 +761,18 @@ files = [
 
 [package.extras]
 all = ["mypy (>=1.11.2)", "pytest (>=8.3.2)", "ruff (>=0.6.2)"]
+
+[[package]]
+name = "iniconfig"
+version = "2.3.0"
+description = "brain-dead simple config-ini parsing"
+optional = false
+python-versions = ">=3.10"
+groups = ["main", "dev"]
+files = [
+    {file = "iniconfig-2.3.0-py3-none-any.whl", hash = "sha256:f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12"},
+    {file = "iniconfig-2.3.0.tar.gz", hash = "sha256:c76315c77db068650d49c5b56314774a7804df16fee4402c1f19d6d15d8c4730"},
+]
 
 [[package]]
 name = "kiwisolver"
@@ -1103,7 +1175,7 @@ version = "26.2"
 description = "Core utilities for Python packages"
 optional = false
 python-versions = ">=3.8"
-groups = ["main"]
+groups = ["main", "dev"]
 files = [
     {file = "packaging-26.2-py3-none-any.whl", hash = "sha256:5fc45236b9446107ff2415ce77c807cee2862cb6fac22b8a73826d0693b0980e"},
     {file = "packaging-26.2.tar.gz", hash = "sha256:ff452ff5a3e828ce110190feff1178bb1f2ea2281fa2075aadb987c2fb221661"},
@@ -1217,6 +1289,22 @@ mic = ["olefile"]
 test-arrow = ["arro3-compute", "arro3-core", "nanoarrow", "pyarrow"]
 tests = ["check-manifest", "coverage (>=7.4.2)", "defusedxml", "markdown2", "olefile", "packaging", "pyroma (>=5)", "pytest", "pytest-cov", "pytest-timeout", "pytest-xdist", "trove-classifiers (>=2024.10.12)"]
 xmp = ["defusedxml"]
+
+[[package]]
+name = "pluggy"
+version = "1.6.0"
+description = "plugin and hook calling mechanisms for python"
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "dev"]
+files = [
+    {file = "pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746"},
+    {file = "pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3"},
+]
+
+[package.extras]
+dev = ["pre-commit", "tox"]
+testing = ["coverage", "pytest", "pytest-benchmark"]
 
 [[package]]
 name = "psycopg2"
@@ -1427,6 +1515,21 @@ toml = ["tomli (>=2.0.1)"]
 yaml = ["pyyaml (>=6.0.1)"]
 
 [[package]]
+name = "pygments"
+version = "2.20.0"
+description = "Pygments is a syntax highlighting package written in Python."
+optional = false
+python-versions = ">=3.9"
+groups = ["main", "dev"]
+files = [
+    {file = "pygments-2.20.0-py3-none-any.whl", hash = "sha256:81a9e26dd42fd28a23a2d169d86d7ac03b46e2f8b59ed4698fb4785f946d0176"},
+    {file = "pygments-2.20.0.tar.gz", hash = "sha256:6757cd03768053ff99f3039c1a36d6c0aa0b263438fcab17520b30a303a82b5f"},
+]
+
+[package.extras]
+windows-terminal = ["colorama (>=0.4.6)"]
+
+[[package]]
 name = "pyparsing"
 version = "3.3.2"
 description = "pyparsing - Classes and methods to define and execute parsing grammars"
@@ -1440,6 +1543,47 @@ files = [
 
 [package.extras]
 diagrams = ["jinja2", "railroad-diagrams"]
+
+[[package]]
+name = "pytest"
+version = "9.1.0"
+description = "pytest: simple powerful testing with Python"
+optional = false
+python-versions = ">=3.10"
+groups = ["main", "dev"]
+files = [
+    {file = "pytest-9.1.0-py3-none-any.whl", hash = "sha256:8ebb0e7888bdf2bdfc602ec51f8f62d50200af37356c74e503c79a94f5c81f32"},
+    {file = "pytest-9.1.0.tar.gz", hash = "sha256:41dd9148c08072446394cefd3d79701701335a9f4cae69ba92e39f6c7f5c061c"},
+]
+
+[package.dependencies]
+colorama = {version = ">=0.4", markers = "sys_platform == \"win32\""}
+iniconfig = ">=1.0.1"
+packaging = ">=22"
+pluggy = ">=1.5,<2"
+pygments = ">=2.7.2"
+
+[package.extras]
+dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "requests", "setuptools", "xmlschema"]
+
+[[package]]
+name = "pytest-asyncio"
+version = "1.4.0"
+description = "Pytest support for asyncio"
+optional = false
+python-versions = ">=3.10"
+groups = ["dev"]
+files = [
+    {file = "pytest_asyncio-1.4.0-py3-none-any.whl", hash = "sha256:933ca923a23075a87fb7070c0ec272a6848489824d887c85c812670932835aa1"},
+    {file = "pytest_asyncio-1.4.0.tar.gz", hash = "sha256:c6c0d2259945122819f171a32ecea2c349ead889ee28176caaf492143424be42"},
+]
+
+[package.dependencies]
+pytest = ">=8.4,<10"
+
+[package.extras]
+docs = ["sphinx (>=5.3)", "sphinx-rtd-theme (>=1)", "sphinx-tabs (>=3.5)"]
+testing = ["coverage (>=6.2)", "hypothesis (>=5.7.1)"]
 
 [[package]]
 name = "python-dateutil"
@@ -1804,6 +1948,19 @@ files = [
 typing-extensions = ">=4.12.0"
 
 [[package]]
+name = "tzdata"
+version = "2026.2"
+description = "Provider of IANA time zone data"
+optional = false
+python-versions = ">=2"
+groups = ["dev"]
+markers = "platform_system == \"Windows\""
+files = [
+    {file = "tzdata-2026.2-py2.py3-none-any.whl", hash = "sha256:bbe9af844f658da81a5f95019480da3a89415801f6cc966806612cc7169bffe7"},
+    {file = "tzdata-2026.2.tar.gz", hash = "sha256:9173fde7d80d9018e02a662e168e5a2d04f87c41ea174b139fbef642eda62d10"},
+]
+
+[[package]]
 name = "urllib3"
 version = "2.7.0"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
@@ -1843,4 +2000,4 @@ standard = ["colorama (>=0.4) ; sys_platform == \"win32\"", "httptools (>=0.6.3)
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "c693a84b2dd640fae0b1841ca3a8fee6f52bb9d5b95129d938e9f8211260d4b0"
+content-hash = "0a2bf19a6324a561aafc63bfd281d61cb5011079d7b4e1e3a759683f8d989e04"

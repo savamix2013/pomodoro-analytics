@@ -4,11 +4,22 @@
 .DEFAULT_GOAL := help
 
 # -------------------------------
-# Run the application using uvicorn
+# Run the application locally using uvicorn (development)
 # -------------------------------
 run:
-	@echo "Running the application..."
-	poetry run uvicorn main:app --host 0.0.0.0 --port 8008 --reload --env-file $(ENV_FILE)
+	@echo "Running the application locally..."
+	poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+	poetry run uvicorn app.main:app --reload
+# -------------------------------
+# Run the application in Docker
+# -------------------------------
+docker-up:
+	@echo "Starting Docker containers..."
+	docker-compose up --build
+
+docker-down:
+	@echo "Stopping Docker containers..."
+	docker-compose down
 
 # -------------------------------
 # Install a dependency using poetry
