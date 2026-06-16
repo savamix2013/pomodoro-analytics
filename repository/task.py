@@ -10,14 +10,14 @@ class TaskRepository:
         self.db_session = db_session
 
     def get_tasks(self):
-        with self.db_session() as session:
+        with self.db_session as session:
             task: list[Tasks] = (
                 session.execute(select(Tasks)).scalars().all()
             )
             return task
 
     def get_task(self, task_id: int) -> Tasks | None:
-        with self.db_session() as session:
+        with self.db_session as session:
             task: Tasks | None = (
                 session.execute(
                     select(Tasks).where(Tasks.id == task_id)
@@ -26,13 +26,13 @@ class TaskRepository:
             return task
 
     def create_task(self, task: Tasks) -> None:
-        with self.db_session() as session:
+        with self.db_session as session:
             session.add(task)
             session.commit()
 
     def delete_task(self, task_id: int) -> None:
         query = delete(Tasks).where(Tasks.id == task_id)
-        with self.db_session() as session:
+        with self.db_session as session:
             session.execute(query)
             session.commit()
 
@@ -43,13 +43,8 @@ class TaskRepository:
             .where(Categories.name == category_name)
         )
 
-        with self.db_session() as session:
+        with self.db_session as session:
             tasks: List[Tasks] = (
                 session.execute(query).scalars().all()
             )
             return tasks
-
-
-def get_tasks_repository() -> TaskRepository:
-    db_session = get_db_session()
-    return TaskRepository(db_session)

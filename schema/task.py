@@ -1,7 +1,9 @@
-from pydantic import BaseModel, Field, model_validator, ValidationInfo
+from pydantic import BaseModel, ConfigDict, model_validator
 
 
 class Task(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int | None = None
     name: str | None = None
     pomodoro_count: int | None = None
