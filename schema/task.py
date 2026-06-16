@@ -9,9 +9,11 @@ class Task(BaseModel):
     pomodoro_count: int | None = None
     category_id: int
 
+    @model_validator(mode="after")
+    def check_name_or_pomodoro_count_is_not_none(self):
+        if self.name is None and self.pomodoro_count is None:
+            raise ValueError("name or pomodoro count must be provided")
+        return self
 
-@model_validator(mode="after")
-def check_name_or_pomodoro_count_is_not_none(self):
-    if self.name is None and self.pomodoro_count is None:
-        raise ValueError("name or pomodoro count must be provided")
-    return self
+
+TaskSchema = Task

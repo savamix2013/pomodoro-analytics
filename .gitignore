@@ -241,5 +241,13 @@ $RECYCLE.BIN/
 *.db-wal
 *.sqlite
 
+# Created by https://www.toptal.com/developers/gitignore/api/redis
+# Edit at https://www.toptal.com/developers/gitignore?templates=redis
 
-# End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,venv,windows,database
+### Redis ###
+# Ignore redis binary dump (dump.rdb) files
+
+*.rdb
+
+# End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,venv,windows,database,redis
+vendor/

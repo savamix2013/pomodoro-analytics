@@ -3,20 +3,21 @@ from typing import List
 from typing import Annotated
 from database import Tasks
 from database.database import get_db_session
-from dependecy import get_tasks_repository
-from repository import TaskRepository
-from schema.task import Task
+from dependecy import get_task_service
+from service import TaskService
+from schema.task import Task, TaskSchema
 
 router = APIRouter(prefix="/task", tags=["task"])
 
 
-@router.get("/all", response_model=List[Task])
+@router.get(
+    path="/all",
+    response_model=List[TaskSchema],
+)
 async def get_tasks(
-    task_repository: Annotated[TaskRepository, Depends(get_tasks_repository)]
+    task_service: Annotated[TaskService, Depends(get_task_service)],
 ):
-    tasks = task_repository.get_tasks()
-    return tasks
-
+    return task_service.get_tasks()
 
 @router.post("/", response_model=Task, status_code=status.HTTP_201_CREATED)
 async def create_task(task: Task):
