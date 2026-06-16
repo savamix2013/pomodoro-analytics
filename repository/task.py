@@ -2,7 +2,8 @@ from typing import List
 from sqlalchemy import select, delete
 from sqlalchemy.orm import Session
 
-from database import Tasks, get_db_session, Categories
+from database import get_db_session
+from models import Tasks, Categories
 
 
 class TaskRepository:

@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from sqlalchemy import select
-from database import Tasks, Base, get_db_session
-from database.database import engine
+from database import Base, get_db_session
+from database.accessor import engine
+from models import Tasks
 from handlers import routers
 
 app = FastAPI()

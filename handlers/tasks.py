@@ -1,8 +1,8 @@
 from fastapi import APIRouter, status, HTTPException, Depends
 from typing import List
 from typing import Annotated
-from database import Tasks
-from database.database import get_db_session
+from database import get_db_session
+from models import Tasks
 from dependecy import get_task_service
 from service import TaskService
 from schema.task import Task, TaskSchema

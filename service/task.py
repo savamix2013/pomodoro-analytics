@@ -1,7 +1,8 @@
 from dataclasses import dataclass
-
+from typing import List
 from repository import TaskRepository, TaskCache
 from schema.task import TaskSchema
+
 
 
 @dataclass
@@ -9,7 +10,7 @@ class TaskService:
     task_repository: TaskRepository
     task_cache: TaskCache
 
-    def get_tasks(self):
+    def get_tasks(self) -> List[TaskSchema]:
         cached_tasks = self.task_cache.get_tasks()
 
         if cached_tasks:
