@@ -271,8 +271,11 @@ vendor/
 pyvenv.cfg
 .venv
 pip-selfcheck.json
-.env
 .env.local
-*.env
-
+# Secrets and configuration
+.env
+.env.*
+!.env.example
+!.env.*.example
+config/secrets/
 # End of https://www.toptal.com/developers/gitignore/api/venv,dotenv
