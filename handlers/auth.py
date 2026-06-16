@@ -18,9 +18,8 @@ async def login(
     body: UserCreateSchema,
     auth_service: Annotated[AuthService, Depends(get_auth_service)]
 ):
-
     try:
-        return auth_service.login(body.username, body.password)
+        return await auth_service.login(body.username, body.password)
 
     except UserNotFoundException as e:
         raise HTTPException(

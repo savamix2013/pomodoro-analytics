@@ -1,4 +1,3 @@
 from cache.accessor import get_redis_connection
 
-
-all = ['get redis_connection']
+__all__ = ['get_redis_connection']
