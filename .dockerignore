@@ -1,0 +1,52 @@
+# =========================
+# Secrets (CRITICAL)
+# =========================
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+credentials
+secrets*
+
+# =========================
+# Python cache & venv
+# =========================
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+.venv/
+venv/
+env/
+
+# =========================
+# Git
+# =========================
+.git/
+
+# =========================
+# IDE
+# =========================
+.vscode/
+.idea/
+*.swp
+
+# =========================
+# OS junk
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
