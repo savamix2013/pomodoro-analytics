@@ -14,7 +14,7 @@ from app.users.user_profile.models import UserProfile
 from app.users.user_profile.repository import UserRepository
 from app.users.user_profile.schema import UserCreateSchema
 from app.users.auth.schema import UserLoginSchema
-from app.users.auth.client import GoogleClient, YandexClient, MailClient
+from app.users.auth.client import GoogleClient, MailClient
 from app.settings import Settings
 
 
@@ -23,7 +23,6 @@ class AuthService:
     user_repository: UserRepository
     settings: Settings
     google_client: GoogleClient
-    yandex_client: YandexClient
     mail_client: MailClient
 
     async def login(self, username: str, password: str) -> UserLoginSchema:

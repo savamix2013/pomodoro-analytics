@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.broker.consumer import BrokerConsumer
 from app.broker.producer import BrokerProducer
-from app.users.auth.client import GoogleClient, YandexClient, MailClient
+from app.users.auth.client import GoogleClient, MailClient
 from app.infrastructure.database import get_db_session
 from app.infrastructure.cache import get_redis_connection
 from app.exception import TokenExpired, TokenNotCorrect
@@ -94,26 +94,16 @@ async def get_google_client(
     )
 
 
-async def get_yandex_client(
-    async_client: httpx.AsyncClient = Depends(get_async_client),
-) -> YandexClient:
-    return YandexClient(
-        settings=Settings(),
-        async_client=async_client,
-    )
-
 
 async def get_auth_service(
     user_repository: UserRepository = Depends(get_user_repository),
     google_client: GoogleClient = Depends(get_google_client),
-    yandex_client: YandexClient = Depends(get_yandex_client),
     mail_client: MailClient = Depends(get_mail_client),
 ) -> AuthService:
     return AuthService(
         user_repository=user_repository,
         settings=Settings(),
         google_client=google_client,
-        yandex_client=yandex_client,
         mail_client=mail_client,
     )
 

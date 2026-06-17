@@ -19,17 +19,6 @@ class GoogleClient:
         pass
 
 
-@dataclass
-class YandexClient:
-    """Yandex OAuth client"""
-    settings: Settings
-    async_client: httpx.AsyncClient
-
-    async def get_user_info(self, token: str) -> Optional[dict]:
-        """Verify Yandex token and get user info"""
-        # Implementation for Yandex OAuth verification
-        pass
-
 
 @dataclass
 class MailClient:
