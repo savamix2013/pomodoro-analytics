@@ -20,6 +20,7 @@ class TaskService:
             return tasks_schema
 
     async def create_task(self, body: TaskCreateSchema, user_id: int) -> TaskSchema:
+        await self.task_cache.delete_tasks()
         task_id = await self.task_repository.create_task(body, user_id)
         task = await self.task_repository.get_task(task_id)
         return TaskSchema.model_validate(task)
@@ -28,6 +29,7 @@ class TaskService:
         task = await self.task_repository.get_user_task(user_id=user_id, task_id=task_id)
         if not task:
             raise TaskNotFound
+        await self.task_cache.delete_tasks()
         task = await self.task_repository.update_task_name(task_id=task_id, name=name)
         return TaskSchema.model_validate(task)
 
@@ -35,4 +37,5 @@ class TaskService:
         task = await self.task_repository.get_user_task(user_id=user_id, task_id=task_id)
         if not task:
             raise TaskNotFound
+        await self.task_cache.delete_tasks()
         await self.task_repository.delete_task(task_id=task_id, user_id=user_id)

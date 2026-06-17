@@ -10,6 +10,7 @@ run:
 	@echo "Running the application locally..."
 	poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 	poetry run uvicorn app.main:app --reload
+	$env:DB_HOST="127.0.0.1"; poetry run alembic upgrade head
 # -------------------------------
 # Run the application in Docker
 # -------------------------------
