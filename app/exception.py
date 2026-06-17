@@ -2,6 +2,10 @@ class UserNotFoundException(Exception):
     detail = "User not found"
 
 
+class UserAlreadyExistsException(Exception):
+    detail = "User already exists"
+
+
 class UserNotCorrectPasswordException(Exception):
     detail = "User not correct password"
 

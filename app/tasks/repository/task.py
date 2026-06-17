@@ -56,3 +56,7 @@ class TaskRepository:
             await session.commit()
             await session.flush()
             return await self.get_task(task_id)
+
+    async def ping_db(self) -> None:
+        async with self.db_session as session:
+            await session.execute(select(1))

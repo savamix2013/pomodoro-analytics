@@ -15,7 +15,10 @@ def settings():
     return Settings()
 
 
-engine = create_async_engine(url="postgresql+asyncpg://postgres:password@127.0.0.1:5432/pomodoro-test", future=True, echo=True, poolclass=NullPool)
+_settings = Settings()
+db_host = "127.0.0.1" if _settings.DB_HOST == "db" else _settings.DB_HOST
+url = f"{_settings.DB_DRIVER}://{_settings.DB_USER}:{_settings.DB_PASSWORD}@{db_host}:{_settings.DB_PORT}/{_settings.DB_NAME}-test"
+engine = create_async_engine(url=url, future=True, echo=True, poolclass=NullPool)
 
 
 AsyncSessionFactory = async_sessionmaker(
